@@ -23,7 +23,11 @@ function parseLine(text: string): RunLine | null {
   return { at: v.at, job: v.job, status: v.status as RunStatus, owner: v.owner, error: v.error ?? null };
 }
 
+// Same pattern as nightsOnDisk. Keeps a route param from reaching outside runsDir.
+const NIGHT = /^\d{4}-\d{2}-\d{2}$/;
+
 export const readNight: ReadNight = (runsDir, night) => {
+  if (!NIGHT.test(night)) return null;
   let text: string;
   try {
     text = readFileSync(join(runsDir, `${night}.jsonl`), 'utf8');

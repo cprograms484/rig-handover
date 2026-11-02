@@ -39,6 +39,10 @@ describe('digest reader', () => {
     expect(readNight('runs', '1999-01-01')).toBeNull();
   });
 
+  it('returns null for a night that is not a date', () => {
+    expect(readNight('runs', '../runs/2026-10-28')).toBeNull();
+  });
+
   it('reads an empty file as no rows', () => {
     const dir = mkdtempSync(join(tmpdir(), 'rig-runs-'));
     writeFileSync(join(dir, '2026-01-01.jsonl'), '');
