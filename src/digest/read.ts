@@ -7,7 +7,7 @@ type RunLine = { at: string; job: string; status: RunStatus; owner: string | nul
 const STATUSES: readonly string[] = ['ok', 'retry', 'fail'];
 
 // Parse at the edge (styleguide). Anything that is not a full run line counts as bad.
-function parseLine(text: string): RunLine | null {
+export function parseLine(text: string): RunLine | null {
   let value: unknown;
   try {
     value = JSON.parse(text);
